@@ -14,9 +14,12 @@ namespace data.Contexto
         {
             _config = config;
         }
+        public DbSet<Cota> Cota { get; set; }
 
         public DbSet<Loja> Loja { get; set; }
 
+        public DbSet<Produto> Produto { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

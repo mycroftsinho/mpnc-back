@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using data.Contexto;
 using dominio.Modelo;
@@ -13,6 +15,16 @@ namespace data.Repositorio.Loja
         public LojaLeituraRepositorio(BuscadorContexto contexto)
         {
             _contexto = contexto;
+        }
+
+        public async Task<IEnumerable<dominio.Modelo.Loja>> BuscarLojasCadastradas()
+        {
+            return await _contexto.Loja.AsNoTracking().Where(x => x.StatusDeAtualizacaoCadastral).ToListAsync();
+        }
+
+        public async Task<IEnumerable<dominio.Modelo.Loja>> BuscarLojasComCadastrosPendentes()
+        {
+            return await _contexto.Loja.AsNoTracking().Where(x => !x.StatusDeAtualizacaoCadastral).ToListAsync();
         }
 
         public async Task<dominio.Modelo.Loja> BuscarLoja(string nome)

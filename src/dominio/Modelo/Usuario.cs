@@ -14,13 +14,13 @@ namespace dominio.Modelo
 
         }
 
-        public int Id { get; private set; }
+        public int Id { get; protected set; }
 
-        public string Nome { get; private set; }
+        public string Nome { get; protected set; }
 
-        public string Email { get; private set; }
+        public string Email { get; protected set; }
 
-        public string Telefone { get; private set; }
+        public string Telefone { get; protected set; }
 
         protected void DefinirTelefone(string telefone)
         {

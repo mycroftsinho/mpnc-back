@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using dominio.Scopers;
 using FluentValidation.Results;
 
@@ -16,6 +17,8 @@ namespace dominio.Modelo
 
         }
 
+        public int CotaId { get; private set; }
+
         public byte[] Fachada { get; private set; }
 
         public string Rua { get; private set; }
@@ -27,6 +30,10 @@ namespace dominio.Modelo
         public string Cep { get; private set; }
 
         public bool StatusDeAtualizacaoCadastral { get; private set; }
+
+        public Cota Cota { get; private set; }
+
+        public ICollection<Produto> Produtos { get; private set; }
 
         public ValidationResult Validar()
         {
@@ -44,6 +51,13 @@ namespace dominio.Modelo
             Rua = rua;
             Bairro = bairro;
             Numero = numero;
+        }
+
+        public void AlterarDadosBasicos(string nome, string email, string telefone)
+        {
+            DefinirNome(nome);
+            DefinirEmail(email);
+            DefinirTelefone(telefone);
         }
 
         public void AlterarDocumentos(byte[] fachada)
