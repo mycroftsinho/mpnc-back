@@ -1,13 +1,15 @@
 using System.Threading.Tasks;
 using core.Gateways;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using usecase.Cases.AprovarSolicitacaoDeCadastro.Input;
 using usecase.Cases.AprovarSolicitacaoDeCadastro.Output;
 
 namespace webapi.UseCases.AprovarSolicitacaoDeCadastro
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("CorsPolicy")]
+    [Route("api/[controller]")]
     public class CadastroController : ControllerBase
     {
         private readonly ILimiteDeEntrada<EntradaDeAprovacaoDeSolicitacao> _input;
@@ -36,13 +38,15 @@ namespace webapi.UseCases.AprovarSolicitacaoDeCadastro
         [Route("ObterCadastro")]
         public async Task<IActionResult> ObterCadastro(AprovacaoRequest message)
         {
-            var request = new EntradaParaObterSolicitacao(message.LojaId, message.Nome);
+            var request = new EntradaParaObterSolicitacao(message.Email, message.Nome);
             await _inputConsulta.Executar(request);
             return _presenter.ViewModel;
         }
 
         [HttpPost]
-        public async Task<IActionResult> SolicitarCadastro([FromBody]AprovacaoRequest message)
+        [Route("AprovarCadastro")]
+        [Produces("application/json")]
+        public async Task<IActionResult> AprovarCadastro([FromBody]AprovacaoRequest message)
         {
             var entrada = new EntradaDeAprovacaoDeSolicitacao(message.LojaId, message.IntencaoDeSolicitacao);
             await _input.Executar(entrada);

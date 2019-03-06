@@ -20,8 +20,7 @@ namespace usecase.Cases.AprovarSolicitacaoDeCadastro
 
         public async Task Executar(EntradaParaObterSolicitacao entrada)
         {
-            var motorista = entrada.LojaId > 0 ? await _leituraRepositorio.BuscarLojaPorId(entrada.LojaId) :
-                await _leituraRepositorio.BuscarLoja(entrada.Nome);
+            var motorista = await _leituraRepositorio.BuscarLoja(entrada.Email, entrada.Nome);
 
             if (motorista != null)
                 _outputBoundary.Popular(new SaidaDeAprovacaoDeSolicitacao(true, null, new SaidaDeLojas(motorista)));

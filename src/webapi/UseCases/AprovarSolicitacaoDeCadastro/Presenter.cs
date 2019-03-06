@@ -1,3 +1,4 @@
+using System.Linq;
 using core.Gateways;
 using Microsoft.AspNetCore.Mvc;
 using usecase.Cases.AprovarSolicitacaoDeCadastro.Output;
@@ -12,13 +13,25 @@ namespace webapi.UseCases.AprovarSolicitacaoDeCadastro
 
         public void Popular(SaidaDeAprovacaoDeSolicitacao resposta)
         {
-            if(resposta == null)
+            if (resposta == null)
             {
                 ViewModel = new NoContentResult();
                 return;
             }
 
-            if(resposta.Situacao)
+            if (resposta.Solicitacao != null)
+            {
+                ViewModel = new JsonResult(resposta.Solicitacao);
+                return;
+            }
+
+            if (resposta.ListagemDeSolicitacoes != null && resposta.ListagemDeSolicitacoes.Any())
+            {
+                ViewModel = new JsonResult(resposta.ListagemDeSolicitacoes);
+                return;
+            }
+
+            if (resposta.Situacao)
                 ViewModel = new OkResult();
             else
                 ViewModel = new BadRequestResult();

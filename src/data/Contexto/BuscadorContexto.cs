@@ -31,6 +31,8 @@ namespace data.Contexto
                 property.Relational().ColumnType = "varchar(256)";
             }
 
+            modelBuilder.Entity<Loja>().HasOne(x => x.Cota).WithOne(y => y.Loja).HasForeignKey<Cota>(z => z.LojaId);
+
             base.OnModelCreating(modelBuilder);
         }
 

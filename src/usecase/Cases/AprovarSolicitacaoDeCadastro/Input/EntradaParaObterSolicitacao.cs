@@ -2,13 +2,13 @@
 {
     public class EntradaParaObterSolicitacao
     {
-        public EntradaParaObterSolicitacao(int lojaId, string nome)
+        public EntradaParaObterSolicitacao(string email, string nome)
         {
-            LojaId = lojaId;
+            Email = email;
             Nome = nome;
         }
 
-        public int LojaId { get; private set; }
+        public string Email { get; private set; }
 
         public string Nome { get; private set; }
     }

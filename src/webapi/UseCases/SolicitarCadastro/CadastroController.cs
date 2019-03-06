@@ -1,13 +1,16 @@
 using System.Threading.Tasks;
 using core.Gateways;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using usecase.Cases.SolicitarCadastro.Input;
 using usecase.Cases.SolicitarCadastro.Output;
 
 namespace webapi.UseCases.SolicitarCadastro
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("CorsPolicy")]
+    [Route("api/[controller]")]
+    [Produces("application/json")]
     public class CadastroController : ControllerBase
     {
         private readonly ILimiteDeEntrada<EntradaDeSolicitacaoDeCadastro> _input;
@@ -20,6 +23,7 @@ namespace webapi.UseCases.SolicitarCadastro
         }
 
         [HttpPost]
+        [Route("SolicitarCadastro")]
         public async Task<IActionResult> SolicitarCadastro([FromBody]CadastroRequest message)
         {
             var entrada = new EntradaDeSolicitacaoDeCadastro(message.Nome, message.Email, message.Telefone, message.Cep, message.Rua, message.Bairro, message.Numero);

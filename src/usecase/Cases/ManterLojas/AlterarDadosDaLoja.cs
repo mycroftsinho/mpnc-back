@@ -22,7 +22,7 @@ namespace usecase.Cases.ManterLojas
 
         public async Task Executar(EntradaParaAlterarDadosDaLoja entrada)
         {
-            var loja = await _leituraRepositorio.BuscarLoja(entrada.Nome);
+            var loja = await _leituraRepositorio.BuscarLoja(entrada.Email, entrada.Nome);
             if (loja == null)
             {
                 _outputBoundary.Popular(new SaidaDeAlteracaoDeLojas(false));
