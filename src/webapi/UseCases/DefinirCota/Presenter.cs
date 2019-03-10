@@ -12,7 +12,22 @@ namespace webapi.UseCases.DefinirCota
 
         public void Popular(SaidaDeDefinicaoDeCota resposta)
         {
-            throw new System.NotImplementedException();
+            if(resposta == null)
+            {
+                ViewModel = new BadRequestResult();
+                return;
+            }
+
+            if(resposta.Cotas != null)
+            {
+                ViewModel = new JsonResult(resposta.Cotas);
+                return;
+            }
+
+            if(resposta.Situacao)
+                ViewModel = new OkResult();
+            else
+                ViewModel = new ConflictResult();
         }
     }
 }

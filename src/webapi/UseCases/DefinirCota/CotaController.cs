@@ -11,15 +11,26 @@ namespace webapi.UseCases.DefinirCota
     [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class CotaController : ControllerBase
+    public class CotaController : Controller
     {
         private readonly ILimiteDeEntrada<EntradaParaDefinicaoDeCota> _inputCadastro;
+        private readonly ILimiteDeEntrada<EntradaParaListagemDeCota> _inputListagem;
         private readonly Presenter _presenter;
 
-        public CotaController(ILimiteDeEntrada<EntradaParaDefinicaoDeCota> inputCadastro, ILimiteDeSaida<SaidaDeDefinicaoDeCota> presenter)
+        public CotaController(ILimiteDeEntrada<EntradaParaDefinicaoDeCota> inputCadastro, ILimiteDeEntrada<EntradaParaListagemDeCota> inputListagem, ILimiteDeSaida<SaidaDeDefinicaoDeCota> presenter)
         {
             _inputCadastro = inputCadastro;
+            _inputListagem = inputListagem;
             _presenter = (Presenter)presenter;
+        }
+
+        [HttpGet]
+        [Route("ListarCotas")]
+        public async Task<IActionResult> ListarCotas()
+        {
+            var request = new EntradaParaListagemDeCota();
+            await _inputListagem.Executar(request);
+            return _presenter.ViewModel;
         }
 
         [HttpPost]

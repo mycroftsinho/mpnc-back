@@ -2,13 +2,15 @@ namespace usecase.Cases.AprovarSolicitacaoDeCadastro.Input
 {
     public class EntradaDeAprovacaoDeSolicitacao
     {
-        public EntradaDeAprovacaoDeSolicitacao(int lojaId, bool intencaoDeAprovacao)
+        public EntradaDeAprovacaoDeSolicitacao(string nome, string email, bool intencaoDeAprovacao)
         {
-            LojaId = lojaId;
+            Nome = nome;
+            Email = email;
             IntencaoDeAprovacao = intencaoDeAprovacao;
         }
 
-        public int LojaId { get; private set; }
+        public string Nome { get; private set; }
+        public string Email { get; private set; }
         public bool IntencaoDeAprovacao { get; private set; }
     }
 }

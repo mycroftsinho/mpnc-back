@@ -30,16 +30,16 @@ namespace usecase.Cases.DefinirCotas
                 if (validacao.IsValid)
                 {
                     await _escritaRepositorio.GravarCota(cotaDaLoja);
-                    _outputBoundary.Popular(new SaidaDeDefinicaoDeCota());
+                    _outputBoundary.Popular(new SaidaDeDefinicaoDeCota(true));
                     return;
                 }
-                _outputBoundary.Popular(new SaidaDeDefinicaoDeCota());
+                _outputBoundary.Popular(new SaidaDeDefinicaoDeCota(true));
                 return;
             }
 
             cotaDaLoja.DefinirQuantidadeDeCota(entrada.Quantidade);
             await _escritaRepositorio.AtualizarCota(cotaDaLoja);
-            _outputBoundary.Popular(new SaidaDeDefinicaoDeCota());
+            _outputBoundary.Popular(new SaidaDeDefinicaoDeCota(true));
         }
     }
 }

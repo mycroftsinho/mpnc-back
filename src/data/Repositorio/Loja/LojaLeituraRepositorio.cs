@@ -36,5 +36,10 @@ namespace data.Repositorio.Loja
         {
             return await _contexto.Loja.AsNoTracking().FirstOrDefaultAsync(x => x.Id.Equals(lojaId));
         }
+
+        public async Task<IEnumerable<dominio.Modelo.Loja>> BuscarLojasAtivas()
+        {
+            return await _contexto.Loja.Include(x => x.Cota).AsNoTracking().Where(x => x.StatusDeAtualizacaoCadastral).ToListAsync();
+        }
     }
 }

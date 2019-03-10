@@ -73,6 +73,7 @@ namespace webapi
 
             // Definir Cotas
             services.AddScoped<ILimiteDeEntrada<EntradaParaDefinicaoDeCota>, DefinirCotaDaLoja>();
+            services.AddScoped<ILimiteDeEntrada<EntradaParaListagemDeCota>, ListagemDeCotas>();
             services.AddScoped<ILimiteDeSaida<SaidaDeDefinicaoDeCota>, UseCases.DefinirCota.Presenter>();
 
             // Manter Lojas

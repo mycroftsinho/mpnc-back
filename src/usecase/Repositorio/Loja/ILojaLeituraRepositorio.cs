@@ -9,6 +9,8 @@ namespace usecase.Repositorio.Loja
         Task<IEnumerable<dominio.Modelo.Loja>> BuscarLojasComCadastrosPendentes();
         
         Task<IEnumerable<dominio.Modelo.Loja>> BuscarLojasCadastradas();
+        
+        Task<IEnumerable<dominio.Modelo.Loja>> BuscarLojasAtivas();
 
         Task<dominio.Modelo.Loja> BuscarLoja(string email, string nome);
         

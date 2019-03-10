@@ -7,7 +7,6 @@ using usecase.Cases.AprovarSolicitacaoDeCadastro.Output;
 
 namespace webapi.UseCases.AprovarSolicitacaoDeCadastro
 {
-    [ApiController]
     [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     public class CadastroController : ControllerBase
@@ -48,7 +47,7 @@ namespace webapi.UseCases.AprovarSolicitacaoDeCadastro
         [Produces("application/json")]
         public async Task<IActionResult> AprovarCadastro([FromBody]AprovacaoRequest message)
         {
-            var entrada = new EntradaDeAprovacaoDeSolicitacao(message.LojaId, message.IntencaoDeSolicitacao);
+            var entrada = new EntradaDeAprovacaoDeSolicitacao(message.Nome, message.Email, message.IntencaoDeAprovacao);
             await _input.Executar(entrada);
             return _presenter.ViewModel;
         }
