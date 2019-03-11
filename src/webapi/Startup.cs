@@ -79,7 +79,7 @@ namespace webapi
             // Manter Lojas
             services.AddScoped<ILimiteDeEntrada<EntradaDeListagemDasLojas>, ListagemDasLojasCadastradas>();
             services.AddScoped<ILimiteDeEntrada<EntradaParaAlterarDadosDaLoja>, AlterarDadosDaLoja>();
-            services.AddScoped<ILimiteDeEntrada<EntradaParaInativaLoja>, InativarLoja>();
+            services.AddScoped<ILimiteDeEntrada<EntradaParaInativarLoja>, InativarLoja>();
             services.AddScoped<ILimiteDeSaida<SaidaDeAlteracaoDeLojas>, UseCases.ManterLoja.Presenter>();
 
             // Manter Produtos

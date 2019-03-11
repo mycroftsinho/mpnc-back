@@ -1,8 +1,8 @@
-namespace usecase.Cases.ManterLojas.Input
+﻿namespace usecase.Cases.ManterLojas.Input
 {
-    public class EntradaParaInativaLoja
+    public class EntradaParaInativarLoja
     {
-        public EntradaParaInativaLoja(int lojaId)
+        public EntradaParaInativarLoja(int lojaId)
         {
             LojaId = lojaId;
             InativarLoja = false;

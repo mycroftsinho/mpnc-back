@@ -6,7 +6,7 @@ using usecase.Repositorio.Loja;
 
 namespace usecase.Cases.ManterLojas
 {
-    public class InativarLoja : ILimiteDeEntrada<EntradaParaInativaLoja>
+    public class InativarLoja : ILimiteDeEntrada<EntradaParaInativarLoja>
     {
         private readonly ILojaLeituraRepositorio _leituraRepositorio;
         private readonly ILojaEscritaRepositorio _escritaRepositorio;
@@ -19,7 +19,7 @@ namespace usecase.Cases.ManterLojas
             _outputBoundary = outputBoundary;
         }
 
-        public async Task Executar(EntradaParaInativaLoja entrada)
+        public async Task Executar(EntradaParaInativarLoja entrada)
         {
             var loja = await _leituraRepositorio.BuscarLojaPorId(entrada.LojaId);
             if(loja == null)

@@ -14,11 +14,11 @@ namespace webapi.UseCases.ManterLoja
     public class LojaController : Controller
     {
         private readonly ILimiteDeEntrada<EntradaParaAlterarDadosDaLoja> _inputCadastro;
-        private readonly ILimiteDeEntrada<EntradaParaInativaLoja> _inputInativar;
+        private readonly ILimiteDeEntrada<EntradaParaInativarLoja> _inputInativar;
         private readonly ILimiteDeEntrada<EntradaDeListagemDasLojas> _inputListagem;
         private readonly Presenter _presenter;
 
-        public LojaController(ILimiteDeEntrada<EntradaParaAlterarDadosDaLoja> inputCadastro, ILimiteDeEntrada<EntradaParaInativaLoja> inputInativar, ILimiteDeEntrada<EntradaDeListagemDasLojas> inputListagem, ILimiteDeSaida<SaidaDeAlteracaoDeLojas> presenter)
+        public LojaController(ILimiteDeEntrada<EntradaParaAlterarDadosDaLoja> inputCadastro, ILimiteDeEntrada<EntradaParaInativarLoja> inputInativar, ILimiteDeEntrada<EntradaDeListagemDasLojas> inputListagem, ILimiteDeSaida<SaidaDeAlteracaoDeLojas> presenter)
         {
             _inputCadastro = inputCadastro;
             _inputInativar = inputInativar;
@@ -48,16 +48,16 @@ namespace webapi.UseCases.ManterLoja
         [Route("CadastrarLoja")]
         public async Task<IActionResult> CadastrarLoja([FromBody] CadastroRequest message)
         {
-            var request = new EntradaParaAlterarDadosDaLoja(message.Nome, message.Email, message.Telefone, message.Cep, message.Rua, message.Bairro, message.Numero);
+            var request = new EntradaParaAlterarDadosDaLoja(message.LojaId, message.Nome, message.Email, message.Telefone, message.Cep, message.Rua, message.Bairro, message.Numero);
             await _inputCadastro.Executar(request);
             return _presenter.ViewModel;
         }
 
         [HttpPost]
-        [Route("RemoverLoja")]
-        public async Task<IActionResult> RemoverLoja([FromBody] RemoverLojaRequest message)
+        [Route("Inativar")]
+        public async Task<IActionResult> Inativar([FromBody] RemoverLojaRequest message)
         {
-            var request = new EntradaParaInativaLoja(message.Id);
+            var request = new EntradaParaInativarLoja(message.Id);
             await _inputInativar.Executar(request);
             return _presenter.ViewModel;
         }

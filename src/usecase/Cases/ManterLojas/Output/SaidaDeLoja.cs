@@ -6,6 +6,7 @@ namespace usecase.Cases.ManterLojas.Output
     {
         public SaidaDeLoja(Loja loja)
         {
+            LojaId = loja.Id;
             Nome = loja.Nome;
             Email = loja.Email;
             Telefone = loja.Telefone;
@@ -15,6 +16,7 @@ namespace usecase.Cases.ManterLojas.Output
             Numero = loja.Numero;
         }
 
+        public int LojaId { get; private set; }
         public string Nome { get; private set; }
         public string Email { get; private set; }
         public string Telefone { get; private set; }

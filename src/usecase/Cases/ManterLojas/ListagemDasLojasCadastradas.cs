@@ -20,6 +20,17 @@ namespace usecase.Cases.ManterLojas
 
         public async Task Executar(EntradaDeListagemDasLojas entrada)
         {
+            if (entrada.Id > 0)
+            {
+                var loja = await _leituraRepositorio.BuscarLojaPorId(entrada.Id.Value);
+                if (loja != null)
+                {
+                    _outputBoundary.Popular(new SaidaDeAlteracaoDeLojas(true, null, new SaidaDeLoja(loja)));
+                    return;
+                }
+                _outputBoundary.Popular(new SaidaDeAlteracaoDeLojas(false));
+                return;
+            }
             var lojas = await _leituraRepositorio.BuscarLojasCadastradas();
             _outputBoundary.Popular(new SaidaDeAlteracaoDeLojas(true, lojas.Select(x => new SaidaDeLoja(x)).ToList()));
         }

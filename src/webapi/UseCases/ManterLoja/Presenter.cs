@@ -12,7 +12,34 @@ namespace webapi.UseCases.ManterLoja
 
         public void Popular(SaidaDeAlteracaoDeLojas resposta)
         {
-            throw new System.NotImplementedException();
+            if(resposta == null)
+            {
+                ViewModel = new BadRequestResult();
+                return;
+            }
+
+            if(resposta.Loja != null)
+            {
+                ViewModel = new JsonResult(resposta.Loja);
+                return;
+            }
+
+            if(resposta.Lojas != null)
+            {
+                ViewModel = new JsonResult(resposta.Lojas);
+                return;
+            }
+
+            if(resposta.Erros != null)
+            {
+                ViewModel = new JsonResult(resposta.Erros);
+                return;
+            }
+
+            if(resposta.Situacao)
+                ViewModel = new OkResult();
+            else
+                ViewModel = new NoContentResult();
         }
     }
 }

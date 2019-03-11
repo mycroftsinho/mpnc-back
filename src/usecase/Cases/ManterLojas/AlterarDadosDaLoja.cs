@@ -22,7 +22,7 @@ namespace usecase.Cases.ManterLojas
 
         public async Task Executar(EntradaParaAlterarDadosDaLoja entrada)
         {
-            var loja = await _leituraRepositorio.BuscarLoja(entrada.Email, entrada.Nome);
+            var loja = await _leituraRepositorio.BuscarLojaPorId(entrada.LojaId);
             if (loja == null)
             {
                 _outputBoundary.Popular(new SaidaDeAlteracaoDeLojas(false));
@@ -39,7 +39,7 @@ namespace usecase.Cases.ManterLojas
                 _outputBoundary.Popular(new SaidaDeAlteracaoDeLojas(true));
                 return;
             }
-            _outputBoundary.Popular(new SaidaDeAlteracaoDeLojas(false, null, validacao.Errors));
+            _outputBoundary.Popular(new SaidaDeAlteracaoDeLojas(false, null, null, validacao.Errors));
         }
     }
 }
