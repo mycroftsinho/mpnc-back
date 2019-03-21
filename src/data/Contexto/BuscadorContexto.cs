@@ -19,6 +19,8 @@ namespace data.Contexto
         public DbSet<Loja> Loja { get; set; }
 
         public DbSet<Produto> Produto { get; set; }
+
+        public DbSet<Login> Login { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using core.Gateways;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using usecase.Cases.ManterLojas.Input;
@@ -8,7 +9,7 @@ using usecase.Cases.ManterLojas.Output;
 namespace webapi.UseCases.ManterLoja
 {
     [ApiController]
-    [EnableCors("CorsPolicy")]
+    [Authorize("Bearer")]
     [Route("api/[controller]")]
     [Produces("application/json")]
     public class LojaController : Controller
