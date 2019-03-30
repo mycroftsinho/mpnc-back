@@ -26,6 +26,9 @@ using Microsoft.Extensions.DependencyInjection;
 using usecase.Cases.AprovarSolicitacaoDeCadastro;
 using usecase.Cases.AprovarSolicitacaoDeCadastro.Input;
 using usecase.Cases.AprovarSolicitacaoDeCadastro.Output;
+using usecase.Cases.RegistrarUsuario.Input;
+using usecase.Cases.RegistrarUsuario;
+using usecase.Cases.RegistrarUsuario.Output;
 
 namespace webapi.Models
 {
@@ -42,6 +45,10 @@ namespace webapi.Models
             // Realizar Login
             services.AddScoped<ILimiteDeEntrada<EntradaParaRealizarLogin>, RealizarLogin>();
             services.AddScoped<ILimiteDeSaida<SaidaDeRealizacaoDeLogin>, UseCases.RealizarLogin.Presenter>();
+
+            // Registrar Usuarios
+            services.AddScoped<ILimiteDeEntrada<EntradaParaRegistrarUsuario>, RegistrarUsuario>();
+            services.AddScoped<ILimiteDeSaida<SaidaParaRegistrarUsuario>, UseCases.RegistrarUsuario.Presenter>();
 
             // Aprovar Solicitacao de Cadastro
             services.AddScoped<ILimiteDeEntrada<EntradaDeAprovacaoDeSolicitacao>, AprovarSolicitacaoDeCadastroPeloAdministrador>();
@@ -74,6 +81,8 @@ namespace webapi.Models
             services.AddScoped<ILojaEscritaRepositorio, LojaEscritaRepositorio>();
             services.AddScoped<IProdutoLeituraRepositorio, ProdutoLeituraRepositorio>();
             services.AddScoped<IProdutoEscritaRepositorio, ProdutoEscritaRepositorio>();
+            services.AddScoped<IUsuarioLeituraRepositorio, UsuarioLeituraRepositorio>();
+            services.AddScoped<IUsuarioEscritaRepositorio, UsuarioEscritaRepositorio>();
 
             return services;
         }

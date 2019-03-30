@@ -16,5 +16,11 @@ namespace data.Repositorio.Produto
         {
             _contexto = contexto;
         }
+
+        public async Task GravarUsuario(Usuario usuario)
+        {
+            await _contexto.AddAsync(usuario);
+            await _contexto.SaveChangesAsync();
+        }
     }
 }

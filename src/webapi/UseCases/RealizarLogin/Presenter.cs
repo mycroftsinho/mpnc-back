@@ -37,14 +37,17 @@ namespace webapi.UseCases.RealizarLogin
             if (resposta.Situacao)
             {
                 ClaimsIdentity identity = new ClaimsIdentity(
-                    new GenericIdentity(resposta.UserName, "Login"),
+                    new GenericIdentity(resposta.Usuario.UserName, "Login"),
                     new[] {
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, resposta.UserName)
+                        new Claim(ClaimTypes.Name, resposta.Usuario.UserName),
+                        new Claim("Id", resposta.Usuario.Id.ToString()),
+                        new Claim(ClaimTypes.Role, resposta.Usuario.Perfil),
+
                     }
                 );
+
                 DateTime dataCriacao = DateTime.Now;
-                DateTime dataExpiracao = dataCriacao + TimeSpan.FromSeconds(tokenConfigurations.Seconds);
 
                 var handler = new JwtSecurityTokenHandler();
                 var securityToken = handler.CreateToken(new SecurityTokenDescriptor
@@ -54,7 +57,7 @@ namespace webapi.UseCases.RealizarLogin
                     SigningCredentials = signingConfigurations.SigningCredentials,
                     Subject = identity,
                     NotBefore = dataCriacao,
-                    Expires = dataExpiracao
+                    Expires = null
                 });
                 var token = handler.WriteToken(securityToken);
 
@@ -62,7 +65,6 @@ namespace webapi.UseCases.RealizarLogin
                 {
                     authenticated = true,
                     created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
-                    expiration = dataExpiracao.ToString("yyyy-MM-dd HH:mm:ss"),
                     accessToken = token,
                     message = "OK"
                 };

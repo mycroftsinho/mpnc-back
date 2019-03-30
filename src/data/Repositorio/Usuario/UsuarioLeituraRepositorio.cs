@@ -17,9 +17,14 @@ namespace data.Repositorio.Produto
             _contexto = contexto;
         }
 
-        public async Task<Login> BuscarUsuario(string userName, string accessKey)
+        public async Task<Usuario> BuscarUsuario(string userName, string password)
         {
-            return await _contexto.Login.FirstOrDefaultAsync(x => x.UserName.Equals(userName) && x.AccessKey.Equals(accessKey));
+            return await _contexto.Usuario.FirstOrDefaultAsync(x => x.Nome.Equals(userName) && x.Password.Equals(password));
+        }
+
+        public async Task<Usuario> BuscarUsuarioPorEmail(string email)
+        {
+            return await _contexto.Usuario.FirstOrDefaultAsync(x => x.Email.Equals(email));
         }
     }
 }

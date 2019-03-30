@@ -2,7 +2,7 @@ namespace webapi.UseCases.RealizarLogin
 {
     public class LoginRequest
     {
-        public string Username { get; set; }
-        public string AccessKey { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
     }
 }

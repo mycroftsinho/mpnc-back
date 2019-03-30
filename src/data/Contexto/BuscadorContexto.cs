@@ -20,7 +20,7 @@ namespace data.Contexto
 
         public DbSet<Produto> Produto { get; set; }
 
-        public DbSet<Login> Login { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

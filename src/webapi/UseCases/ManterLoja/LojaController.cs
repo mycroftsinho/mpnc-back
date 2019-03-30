@@ -40,6 +40,7 @@ namespace webapi.UseCases.ManterLoja
         [Route("ObterLoja")]
         public async Task<IActionResult> ObterLoja(int id)
         {
+            var userName = User.Identity.Name;
             var request = new EntradaDeListagemDasLojas(id);
             await _inputListagem.Executar(request);
             return _presenter.ViewModel;

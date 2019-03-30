@@ -26,7 +26,7 @@ namespace webapi.UseCases.RealizarLogin
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]LoginRequest message)
         {
-            var request = new EntradaParaRealizarLogin(message.Username, message.AccessKey);
+            var request = new EntradaParaRealizarLogin(message.Email, message.Senha);
             await _input.Executar(request);
             return _presenter.ViewModel;
         }

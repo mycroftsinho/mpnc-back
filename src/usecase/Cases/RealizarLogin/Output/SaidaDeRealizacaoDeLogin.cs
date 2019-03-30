@@ -9,16 +9,18 @@ namespace usecase.Cases.RealizarLogin.Output
             Situacao = situacao;
         }
 
-        public SaidaDeRealizacaoDeLogin(bool situacao, Login usuario)
+        public SaidaDeRealizacaoDeLogin(bool situacao, Usuario usuario)
         {
-            UserName = usuario.UserName;
-            AccessKey = usuario.AccessKey;
+            AccessKey = usuario.Password;
             Situacao = situacao;
+            Usuario = new DadosDoUsuario(usuario.Id, usuario.Nome, "Administrador");
         }
 
-        public string UserName { get; private set; }
         public string AccessKey { get; private set; }
+
         public bool Situacao { get; private set; }
+
+        public DadosDoUsuario Usuario { get; private set; }
 
     }
 }

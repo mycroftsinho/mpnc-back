@@ -5,6 +5,8 @@ namespace usecase.Repositorio.Usuario
 {
     public interface IUsuarioLeituraRepositorio
     {
-        Task<Login> BuscarUsuario(string userName, string accessKey);
+        Task<dominio.Modelo.Usuario> BuscarUsuario(string userName, string password);
+        
+        Task<dominio.Modelo.Usuario> BuscarUsuarioPorEmail(string email);
     }
 }

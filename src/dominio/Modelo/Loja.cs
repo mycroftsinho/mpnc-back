@@ -6,9 +6,10 @@ namespace dominio.Modelo
 {
     public class Loja : Usuario
     {
-        public Loja(string nome, string email, string telefone, string rua, string numero, string bairro, string cep) : base(nome, email, telefone)
+        public Loja(string nome, string email, string telefone, string rua, string numero, string bairro, string cep) : base(nome, email, "")
         {
             AlterarEndereco(cep, rua, bairro, numero);
+            DefinirTelefone(telefone);
             StatusDeAtualizacaoCadastral = false;
         }
 
@@ -18,6 +19,8 @@ namespace dominio.Modelo
         }
 
         public int CotaId { get; private set; }
+
+        public string Telefone { get; protected set; }
 
         public byte[] Fachada { get; private set; }
 
@@ -63,6 +66,11 @@ namespace dominio.Modelo
         public void AlterarDocumentos(byte[] fachada)
         {
             Fachada = fachada;
+        }
+
+        protected void DefinirTelefone(string telefone)
+        {
+            if (!string.IsNullOrWhiteSpace(telefone)) Telefone = telefone;
         }
     }
 }
