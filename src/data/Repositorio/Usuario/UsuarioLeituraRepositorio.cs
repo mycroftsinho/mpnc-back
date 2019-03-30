@@ -19,7 +19,7 @@ namespace data.Repositorio.Produto
 
         public async Task<Usuario> BuscarUsuario(string userName, string password)
         {
-            return await _contexto.Usuario.FirstOrDefaultAsync(x => x.Nome.Equals(userName) && x.Password.Equals(password));
+            return await _contexto.Usuario.FirstOrDefaultAsync(x => x.Email.Equals(userName) && x.Password.Equals(password));
         }
 
         public async Task<Usuario> BuscarUsuarioPorEmail(string email)

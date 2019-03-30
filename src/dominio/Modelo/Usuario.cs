@@ -14,6 +14,12 @@ namespace dominio.Modelo
             DefinirPassword(senha);
         }
 
+        public Usuario(string email, string senha)
+        {
+            DefinirEmail(email);
+            DefinirPassword(senha);
+        }
+
         protected Usuario()
         {
 

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using core.Gateways;
+using dominio.Modelo;
 using usecase.Cases.RealizarLogin.Input;
 using usecase.Cases.RealizarLogin.Output;
 using usecase.Repositorio.Usuario;
@@ -19,10 +20,11 @@ namespace usecase.Cases.RealizarLogin
 
         public async Task Executar(EntradaParaRealizarLogin entrada)
         {
-            var usuario = await _leituraRepositorio.BuscarUsuario(entrada.UserName, entrada.AccessKey);
-            if (usuario != null)
+            var usuario = new Usuario(entrada.UserName, entrada.AccessKey);
+            var auth = await _leituraRepositorio.BuscarUsuario(usuario.Email, usuario.Password);
+            if (auth != null)
             {
-                _outputBoundary.Popular(new SaidaDeRealizacaoDeLogin(true, usuario));
+                _outputBoundary.Popular(new SaidaDeRealizacaoDeLogin(true, auth));
                 return;
             }
             _outputBoundary.Popular(new SaidaDeRealizacaoDeLogin(false));

@@ -13,7 +13,7 @@ namespace usecase.Cases.RealizarLogin.Output
         {
             AccessKey = usuario.Password;
             Situacao = situacao;
-            Usuario = new DadosDoUsuario(usuario.Id, usuario.Nome, "Administrador");
+            Usuario = new DadosDoUsuario(usuario.Id, usuario.Email, "Administrador");
         }
 
         public string AccessKey { get; private set; }
