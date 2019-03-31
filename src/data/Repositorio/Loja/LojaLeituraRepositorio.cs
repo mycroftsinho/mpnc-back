@@ -29,7 +29,7 @@ namespace data.Repositorio.Loja
 
         public async Task<dominio.Modelo.Loja> BuscarLoja(string email, string nome)
         {
-            return await _contexto.Loja.AsNoTracking().FirstOrDefaultAsync(x => x.Nome.Equals(nome) && x.Email.Equals(email));
+            return await _contexto.Loja.AsNoTracking().FirstOrDefaultAsync(x => x.NomeDaLoja.Equals(nome) && x.Email.Equals(email));
         }
 
         public async Task<dominio.Modelo.Loja> BuscarLojaPorId(int lojaId)

@@ -7,11 +7,12 @@ namespace dominio.Modelo
 {
     public class Usuario
     {
-        public Usuario(string nome, string email, string senha)
+        public Usuario(string nome, string email, string senha, string perfil)
         {
             DefinirNome(nome);
             DefinirEmail(email);
             DefinirPassword(senha);
+            DefinirPerfilDeAcesso(perfil);
         }
 
         public Usuario(string email, string senha)
@@ -33,6 +34,8 @@ namespace dominio.Modelo
 
         public string Password { get; private set; }
 
+        public string PerfilDeAcesso { get; private set; }
+
         protected void DefinirEmail(string email)
         {
             if (!string.IsNullOrWhiteSpace(email)) Email = email;
@@ -41,6 +44,11 @@ namespace dominio.Modelo
         protected void DefinirNome(string nome)
         {
             if (!string.IsNullOrWhiteSpace(nome)) Nome = nome;
+        }
+
+        protected void DefinirPerfilDeAcesso(string perfil)
+        {
+            if (!string.IsNullOrWhiteSpace(perfil)) PerfilDeAcesso = perfil;
         }
 
         public ValidationResult Validar()

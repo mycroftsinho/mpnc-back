@@ -22,7 +22,7 @@ namespace usecase.Cases.DefinirCotas
         public async Task Executar(EntradaParaListagemDeCota entrada)
         {
             var lojas = await _leituraRepositorio.BuscarLojasAtivas();
-            _outputBoundary.Popular(new SaidaDeDefinicaoDeCota(true, lojas?.Select(x => new SaidaDeCota(x.Id, x.Cota?.Quantidade,x.Nome, x.Email,x.Telefone)).ToList()));
+            _outputBoundary.Popular(new SaidaDeDefinicaoDeCota(true, lojas?.Select(x => new SaidaDeCota(x.Id, x.Cota?.Quantidade,x.NomeDaLoja, x.Email,x.Telefone)).ToList()));
         }
     }
 }

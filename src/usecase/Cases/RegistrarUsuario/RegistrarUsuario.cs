@@ -9,6 +9,7 @@ namespace usecase.Cases.RegistrarUsuario
 {
     public class RegistrarUsuario : ILimiteDeEntrada<EntradaParaRegistrarUsuario>
     {
+        private const string perfil = "Cliente";
         private readonly IUsuarioLeituraRepositorio _leituraRepositorio;
         private readonly IUsuarioEscritaRepositorio _escritaRepositorio;
         private readonly ILimiteDeSaida<SaidaParaRegistrarUsuario> _outputBoundary;
@@ -20,6 +21,8 @@ namespace usecase.Cases.RegistrarUsuario
             _outputBoundary = outputBoundary;
         }
 
+        public static string Perfil => perfil;
+
         public async Task Executar(EntradaParaRegistrarUsuario entrada)
         {
             var usuario = await _leituraRepositorio.BuscarUsuarioPorEmail(entrada.Email);
@@ -29,7 +32,7 @@ namespace usecase.Cases.RegistrarUsuario
                 return;
             }
 
-            usuario = new Usuario(entrada.Nome, entrada.Email, entrada.Senha);
+            usuario = new Usuario(entrada.Nome, entrada.Email, entrada.Senha, perfil);
             var validacao = usuario.Validar();
             if (!validacao.IsValid)
             {

@@ -4,12 +4,12 @@ using FluentValidation.Results;
 
 namespace dominio.Modelo
 {
-    public class Loja : Usuario
+    public class Loja
     {
-        public Loja(string nome, string email, string telefone, string rua, string numero, string bairro, string cep) : base(nome, email, "")
+        public Loja(string nome, string email, string telefone, string rua, string numero, string bairro, string cep)
         {
             AlterarEndereco(cep, rua, bairro, numero);
-            DefinirTelefone(telefone);
+            AlterarDadosBasicos(nome, email, telefone);
             StatusDeAtualizacaoCadastral = false;
         }
 
@@ -18,7 +18,11 @@ namespace dominio.Modelo
 
         }
 
-        public int CotaId { get; private set; }
+        public int Id { get; private set; }
+        
+        public string NomeDaLoja { get; private set; }
+
+        public string Email { get; private set; }
 
         public string Telefone { get; protected set; }
 
@@ -71,6 +75,16 @@ namespace dominio.Modelo
         protected void DefinirTelefone(string telefone)
         {
             if (!string.IsNullOrWhiteSpace(telefone)) Telefone = telefone;
+        }
+
+        protected void DefinirNome(string nome)
+        {
+            if (!string.IsNullOrWhiteSpace(nome)) NomeDaLoja = nome;
+        }
+
+        protected void DefinirEmail(string email)
+        {
+            if (!string.IsNullOrWhiteSpace(email)) Email = email;
         }
     }
 }
