@@ -66,7 +66,9 @@ namespace webapi.UseCases.RealizarLogin
                     authenticated = true,
                     created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
                     accessToken = token,
-                    message = "OK"
+                    message = "OK",
+                    user = resposta.Usuario.UserName,
+                    perfil = resposta.Usuario.Perfil
                 };
 
                 ViewModel = new JsonResult(resultado);
