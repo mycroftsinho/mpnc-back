@@ -1,3 +1,4 @@
+using System.Linq;
 using core.Gateways;
 using Microsoft.AspNetCore.Mvc;
 using usecase.Cases.SolicitarCadastro.Output;
@@ -15,6 +16,12 @@ namespace webapi.UseCases.SolicitarCadastro
             if (resposta == null)
             {
                 ViewModel = new NotFoundResult();
+                return;
+            }
+
+            if(resposta.Erros != null && resposta.Erros.Any())
+            {
+                ViewModel = new BadRequestObjectResult(resposta.Erros.Select(x => $"{x.ErrorMessage} -"));
                 return;
             }
 

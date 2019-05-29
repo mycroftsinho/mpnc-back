@@ -6,7 +6,7 @@ namespace usecase.Cases.AprovarSolicitacaoDeCadastro.Output
     {
         public SaidaDeLojas(Loja loja)
         {
-            Nome = loja.NomeDaLoja;
+            Nome = loja.Empresa;
             Email = loja.Email;
             Telefone = loja.Telefone;
             Cep = loja.Cep;

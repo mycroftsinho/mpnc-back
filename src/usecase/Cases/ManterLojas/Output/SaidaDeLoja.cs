@@ -7,7 +7,7 @@ namespace usecase.Cases.ManterLojas.Output
         public SaidaDeLoja(Loja loja)
         {
             LojaId = loja.Id;
-            Nome = loja.NomeDaLoja;
+            Nome = loja.Empresa;
             Email = loja.Email;
             Telefone = loja.Telefone;
             Cep = loja.Cep;

@@ -13,6 +13,13 @@ namespace dominio.Modelo
             StatusDeAtualizacaoCadastral = false;
         }
 
+        public Loja(string nome, string email, string telefone, string cnpj, string empresa)
+        {
+            AlterarDadosBasicos(nome, email, telefone);
+            AlterarDadosLegais(cnpj,empresa);
+            StatusDeAtualizacaoCadastral = false;
+        }
+
         protected Loja()
         {
 
@@ -20,7 +27,7 @@ namespace dominio.Modelo
 
         public int Id { get; private set; }
         
-        public string NomeDaLoja { get; private set; }
+        public string Representante { get; private set; }
 
         public string Email { get; private set; }
 
@@ -35,6 +42,10 @@ namespace dominio.Modelo
         public string Bairro { get; private set; }
 
         public string Cep { get; private set; }
+
+        public string Cnpj { get; private set; }
+
+        public string Empresa { get; private set; }
 
         public bool StatusDeAtualizacaoCadastral { get; private set; }
 
@@ -52,6 +63,12 @@ namespace dominio.Modelo
             StatusDeAtualizacaoCadastral = intencaoDeAprovacao;
         }
 
+        public void AlterarDadosLegais(string cnpj, string empresa)
+        {
+            Cnpj = cnpj;
+            Empresa = empresa;
+        }
+
         public void AlterarEndereco(string cep, string rua, string bairro, string numero)
         {
             Cep = cep;
@@ -62,9 +79,9 @@ namespace dominio.Modelo
 
         public void AlterarDadosBasicos(string nome, string email, string telefone)
         {
-            DefinirNome(nome);
             DefinirEmail(email);
             DefinirTelefone(telefone);
+            DefinirRepresentante(nome);
         }
 
         public void AlterarDocumentos(byte[] fachada)
@@ -77,9 +94,9 @@ namespace dominio.Modelo
             if (!string.IsNullOrWhiteSpace(telefone)) Telefone = telefone;
         }
 
-        protected void DefinirNome(string nome)
+        protected void DefinirRepresentante(string nome)
         {
-            if (!string.IsNullOrWhiteSpace(nome)) NomeDaLoja = nome;
+            if (!string.IsNullOrWhiteSpace(nome)) Representante = nome;
         }
 
         protected void DefinirEmail(string email)

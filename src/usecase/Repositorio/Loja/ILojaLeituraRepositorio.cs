@@ -12,7 +12,7 @@ namespace usecase.Repositorio.Loja
         
         Task<IEnumerable<dominio.Modelo.Loja>> BuscarLojasAtivas();
 
-        Task<dominio.Modelo.Loja> BuscarLoja(string email, string nome);
+        Task<dominio.Modelo.Loja> BuscarLoja(string email, string cnpj);
         
         Task<dominio.Modelo.Loja> BuscarLojaPorId(int lojaId);
     }

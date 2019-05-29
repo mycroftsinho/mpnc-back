@@ -19,14 +19,14 @@ namespace webapi.UseCases.SolicitarCadastro
         public CadastroController(ILimiteDeEntrada<EntradaDeSolicitacaoDeCadastro> input, ILimiteDeSaida<SaidaDaSolicitacaoDeCadastro> presenter)
         {
             _input = input;
-            _presenter = (Presenter) presenter;
+            _presenter = (Presenter)presenter;
         }
 
         [HttpPost]
         [Route("SolicitarCadastro")]
         public async Task<IActionResult> SolicitarCadastro([FromBody]CadastroRequest message)
         {
-            var entrada = new EntradaDeSolicitacaoDeCadastro(message.Nome, message.Email, message.Telefone, message.Cep, message.Rua, message.Bairro, message.Numero);
+            var entrada = new EntradaDeSolicitacaoDeCadastro(message.Nome, message.Email, message.Telefone, message.Cnpj, message.Empresa);
             await _input.Executar(entrada);
             return _presenter.ViewModel;
         }

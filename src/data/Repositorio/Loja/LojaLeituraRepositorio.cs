@@ -27,9 +27,9 @@ namespace data.Repositorio.Loja
             return await _contexto.Loja.AsNoTracking().Where(x => !x.StatusDeAtualizacaoCadastral).ToListAsync();
         }
 
-        public async Task<dominio.Modelo.Loja> BuscarLoja(string email, string nome)
+        public async Task<dominio.Modelo.Loja> BuscarLoja(string email, string cnpj)
         {
-            return await _contexto.Loja.AsNoTracking().FirstOrDefaultAsync(x => x.NomeDaLoja.Equals(nome) && x.Email.Equals(email));
+            return await _contexto.Loja.AsNoTracking().FirstOrDefaultAsync(x => x.Cnpj.Equals(cnpj) && x.Email.Equals(email));
         }
 
         public async Task<dominio.Modelo.Loja> BuscarLojaPorId(int lojaId)

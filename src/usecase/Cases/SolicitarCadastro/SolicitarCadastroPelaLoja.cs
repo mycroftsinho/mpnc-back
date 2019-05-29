@@ -22,8 +22,8 @@ namespace usecase.Cases.SolicitarCadastro
 
         public async Task Executar(EntradaDeSolicitacaoDeCadastro entrada)
         {
-            var loja = new Loja(entrada.Nome, entrada.Email, entrada.Telefone, entrada.Rua, entrada.Numero, entrada.Bairro, entrada.Cep);
-            var lojaDuplicada = await _leituraRepositorio.BuscarLoja(loja.Email, loja.NomeDaLoja);
+            var loja = new Loja(entrada.Nome, entrada.Email, entrada.Telefone, entrada.Cnpj, entrada.Empresa);
+            var lojaDuplicada = await _leituraRepositorio.BuscarLoja(loja.Email, loja.Cnpj);
             if (lojaDuplicada != null)
             {
                 _outputBoundary.Popular(new SaidaDaSolicitacaoDeCadastro(false));

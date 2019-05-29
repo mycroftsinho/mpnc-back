@@ -7,10 +7,11 @@ namespace dominio.Scopers
     {
         public ValidacaoDoCadastroDaLoja()
         {
-            RuleFor(x => x.Cep).NotNull().Length(8, 8).WithMessage("Cep inválido!");
-            RuleFor(x => x.Rua).NotNull().Length(2, 150).WithMessage("Rua inválida!");
-            RuleFor(x => x.Bairro).NotNull().Length(2, 150).WithMessage("Bairro inválido!");
-            RuleFor(x => x.Numero).NotNull().Length(1, 8).WithMessage("Número inválido!");
+            RuleFor(x => x.Cnpj).NotNull().WithMessage("Cnpj inválido!");
+            RuleFor(x => x.Representante).NotNull().WithMessage("Representante Inválido!");
+            RuleFor(x => x.Empresa).NotNull().WithMessage("Empresa inválida!");
+            RuleFor(x => x.Telefone).NotNull().WithMessage("Telefone inválido!");
+            RuleFor(x => x.Email).NotNull().EmailAddress().WithMessage("Email inválido!");
         }
     }
 }
