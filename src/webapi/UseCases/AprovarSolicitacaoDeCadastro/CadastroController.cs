@@ -37,7 +37,7 @@ namespace webapi.UseCases.AprovarSolicitacaoDeCadastro
         [Route("ObterCadastro")]
         public async Task<IActionResult> ObterCadastro(AprovacaoRequest message)
         {
-            var request = new EntradaParaObterSolicitacao(message.Email, message.Nome);
+            var request = new EntradaParaObterSolicitacao(message.Email, message.Cnpj);
             await _inputConsulta.Executar(request);
             return _presenter.ViewModel;
         }
@@ -47,7 +47,7 @@ namespace webapi.UseCases.AprovarSolicitacaoDeCadastro
         [Produces("application/json")]
         public async Task<IActionResult> AprovarCadastro([FromBody]AprovacaoRequest message)
         {
-            var entrada = new EntradaDeAprovacaoDeSolicitacao(message.Nome, message.Email, message.IntencaoDeAprovacao);
+            var entrada = new EntradaDeAprovacaoDeSolicitacao(message.Cnpj, message.Email, message.IntencaoDeAprovacao);
             await _input.Executar(entrada);
             return _presenter.ViewModel;
         }

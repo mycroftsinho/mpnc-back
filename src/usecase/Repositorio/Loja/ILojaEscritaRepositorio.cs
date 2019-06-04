@@ -7,5 +7,6 @@ namespace usecase.Repositorio.Loja
     {
         Task GravarLoja(dominio.Modelo.Loja loja);
         Task AtualizarLoja(dominio.Modelo.Loja loja);
+        Task RemoverLoja(dominio.Modelo.Loja loja);
     }
 }

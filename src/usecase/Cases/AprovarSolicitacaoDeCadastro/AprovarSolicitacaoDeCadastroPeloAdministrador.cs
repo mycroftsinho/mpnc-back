@@ -26,7 +26,7 @@ namespace usecase.Cases.AprovarSolicitacaoDeCadastro
 
         public async Task Executar(EntradaDeAprovacaoDeSolicitacao entrada)
         {
-            var loja = await _leituraRepositorio.BuscarLoja(entrada.Email, entrada.Nome);
+            var loja = await _leituraRepositorio.BuscarLoja(entrada.Email, entrada.Cnpj);
             if (loja == null)
             {
                 _outputBoundary.Popular(new SaidaDeAprovacaoDeSolicitacao(false));
@@ -38,10 +38,14 @@ namespace usecase.Cases.AprovarSolicitacaoDeCadastro
 
             if (entrada.IntencaoDeAprovacao)
             {
-                var usuario = new Usuario(entrada.Nome, entrada.Email, entrada.Email, perfil);
+                var usuario = new Usuario(loja.Empresa, entrada.Email, entrada.Email, perfil);
                 var validacao = usuario.Validar();
                 if (validacao.IsValid)
                     await _usuarioEscritaRepositorio.GravarUsuario(usuario);
+            }
+            else
+            {
+                await _escritaRepositorio.RemoverLoja(loja);
             }
             _outputBoundary.Popular(new SaidaDeAprovacaoDeSolicitacao(true));
         }

@@ -15,7 +15,7 @@ namespace webapi.UseCases.AprovarSolicitacaoDeCadastro
         {
             if (resposta == null)
             {
-                ViewModel = new NoContentResult();
+                ViewModel = new BadRequestObjectResult("Erro ao encontrar a(s) loja(s)!");
                 return;
             }
 
@@ -34,7 +34,7 @@ namespace webapi.UseCases.AprovarSolicitacaoDeCadastro
             if (resposta.Situacao)
                 ViewModel = new OkResult();
             else
-                ViewModel = new BadRequestResult();
+                ViewModel = new BadRequestObjectResult("Falha no cadastro da loja. Tente novamente!");
         }
     }
 }

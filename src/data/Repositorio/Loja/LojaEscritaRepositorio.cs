@@ -25,5 +25,11 @@ namespace data.Repositorio.Loja
             await _contexto.AddAsync(loja);
             await _contexto.SaveChangesAsync();
         }
+
+        public async Task RemoverLoja(dominio.Modelo.Loja loja)
+        {
+            _contexto.Remove(loja);
+            await _contexto.SaveChangesAsync();
+        }
     }
 }

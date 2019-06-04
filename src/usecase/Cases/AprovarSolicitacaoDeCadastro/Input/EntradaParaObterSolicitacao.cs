@@ -2,14 +2,14 @@
 {
     public class EntradaParaObterSolicitacao
     {
-        public EntradaParaObterSolicitacao(string email, string nome)
+        public EntradaParaObterSolicitacao(string email, string cnpj)
         {
             Email = email;
-            Nome = nome;
+            Cnpj = cnpj;
         }
 
         public string Email { get; private set; }
 
-        public string Nome { get; private set; }
+        public string Cnpj { get; private set; }
     }
 }

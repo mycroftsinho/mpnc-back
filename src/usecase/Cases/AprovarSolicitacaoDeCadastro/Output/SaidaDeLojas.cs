@@ -6,21 +6,24 @@ namespace usecase.Cases.AprovarSolicitacaoDeCadastro.Output
     {
         public SaidaDeLojas(Loja loja)
         {
-            Nome = loja.Empresa;
+            LojaId = loja.Id;
+            Cnpj = loja.Cnpj;
+            Representante = loja.Representante;
+            Empresa = loja.Empresa;
             Email = loja.Email;
             Telefone = loja.Telefone;
-            Cep = loja.Cep;
-            Rua = loja.Rua;
-            Bairro = loja.Bairro;
-            Numero = loja.Numero;
         }
 
-        public string Nome { get; private set; }
+        public int LojaId { get; private set; }
+        
+        public string Empresa { get; private set; }
+
+        public string Cnpj { get; private set; }
+
+        public string Representante { get; private set; }
+
         public string Email { get; private set; }
+
         public string Telefone { get; private set; }
-        public string Cep { get; private set; }
-        public string Rua { get; private set; }
-        public string Bairro { get; private set; }
-        public string Numero { get; private set; }
     }
 }
