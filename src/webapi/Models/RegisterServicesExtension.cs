@@ -11,6 +11,8 @@ using usecase.Repositorio.Produto;
 using usecase.Repositorio.Usuario;
 using usecase.Cases.RealizarLogin;
 using usecase.Cases.ManterProdutos;
+using usecase.Cases.ManterEnderecos;
+using usecase.Cases.RegistrarUsuario;
 using usecase.Cases.SolicitarCadastro;
 using usecase.Cases.ManterLojas.Input;
 using usecase.Cases.ManterLojas.Output;
@@ -20,15 +22,16 @@ using usecase.Cases.RealizarLogin.Input;
 using usecase.Cases.RealizarLogin.Output;
 using usecase.Cases.ManterProdutos.Input;
 using usecase.Cases.ManterProdutos.Output;
+using usecase.Cases.ManterEnderecos.Input;
+using usecase.Cases.ManterEnderecos.Output;
+using usecase.Cases.RegistrarUsuario.Input;
+using usecase.Cases.RegistrarUsuario.Output;
 using usecase.Cases.SolicitarCadastro.Input;
 using usecase.Cases.SolicitarCadastro.Output;
-using Microsoft.Extensions.DependencyInjection;
 using usecase.Cases.AprovarSolicitacaoDeCadastro;
 using usecase.Cases.AprovarSolicitacaoDeCadastro.Input;
 using usecase.Cases.AprovarSolicitacaoDeCadastro.Output;
-using usecase.Cases.RegistrarUsuario.Input;
-using usecase.Cases.RegistrarUsuario;
-using usecase.Cases.RegistrarUsuario.Output;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace webapi.Models
 {
@@ -66,6 +69,12 @@ namespace webapi.Models
             services.AddScoped<ILimiteDeEntrada<EntradaParaAlterarDadosDaLoja>, AlterarDadosDaLoja>();
             services.AddScoped<ILimiteDeEntrada<EntradaParaInativarLoja>, InativarLoja>();
             services.AddScoped<ILimiteDeSaida<SaidaDeAlteracaoDeLojas>, UseCases.ManterLoja.Presenter>();
+
+            // Manter Endereços
+            services.AddScoped<ILimiteDeEntrada<EntradaParaGravarOuAlterarEndereco>, GravarOuAlterarEndereco>();
+            services.AddScoped<ILimiteDeEntrada<EntradaParaBuscarEndereco>, BuscarEndereco>();
+            services.AddScoped<ILimiteDeEntrada<EntradaParaRemoverEndereco>, RemoverEndereco>();
+            services.AddScoped<ILimiteDeSaida<SaidaParaManterEnderecos>, UseCases.ManterEnderecos.Presenter>();
 
             // Manter Produtos
             services.AddScoped<ILimiteDeEntrada<EntradaParaRemoverProduto>, RemoverProduto>();

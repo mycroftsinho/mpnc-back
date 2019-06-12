@@ -6,13 +6,6 @@ namespace dominio.Modelo
 {
     public class Loja
     {
-        public Loja(string nome, string email, string telefone, string rua, string numero, string bairro, string cep)
-        {
-            AlterarEndereco(cep, rua, bairro, numero);
-            AlterarDadosBasicos(nome, email, telefone);
-            StatusDeAtualizacaoCadastral = false;
-        }
-
         public Loja(string nome, string email, string telefone, string cnpj, string empresa)
         {
             AlterarDadosBasicos(nome, email, telefone);
@@ -35,14 +28,6 @@ namespace dominio.Modelo
 
         public byte[] Fachada { get; private set; }
 
-        public string Rua { get; private set; }
-
-        public string Numero { get; private set; }
-
-        public string Bairro { get; private set; }
-
-        public string Cep { get; private set; }
-
         public string Cnpj { get; private set; }
 
         public string Empresa { get; private set; }
@@ -52,6 +37,8 @@ namespace dominio.Modelo
         public Cota Cota { get; private set; }
 
         public ICollection<Produto> Produtos { get; private set; }
+
+        public ICollection<Endereco> Enderecos { get; private set; }
 
         public ValidationResult Validar()
         {
@@ -67,14 +54,6 @@ namespace dominio.Modelo
         {
             Cnpj = cnpj;
             Empresa = empresa;
-        }
-
-        public void AlterarEndereco(string cep, string rua, string bairro, string numero)
-        {
-            Cep = cep;
-            Rua = rua;
-            Bairro = bairro;
-            Numero = numero;
         }
 
         public void AlterarDadosBasicos(string nome, string email, string telefone)

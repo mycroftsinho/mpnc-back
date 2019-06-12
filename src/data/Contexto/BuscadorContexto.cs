@@ -14,6 +14,7 @@ namespace data.Contexto
         {
             _config = config;
         }
+
         public DbSet<Cota> Cota { get; set; }
 
         public DbSet<Loja> Loja { get; set; }
@@ -21,7 +22,9 @@ namespace data.Contexto
         public DbSet<Produto> Produto { get; set; }
 
         public DbSet<Usuario> Usuario { get; set; }
-        
+
+        public DbSet<Endereco> Endereco { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
@@ -34,6 +37,8 @@ namespace data.Contexto
             }
 
             modelBuilder.Entity<Loja>().HasOne(x => x.Cota).WithOne(y => y.Loja).HasForeignKey<Cota>(z => z.LojaId);
+
+            modelBuilder.Entity<Loja>().HasMany(x => x.Enderecos).WithOne(y => y.Loja).HasForeignKey(z => z.LojaId);
 
             base.OnModelCreating(modelBuilder);
         }

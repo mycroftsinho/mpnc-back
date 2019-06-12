@@ -29,7 +29,6 @@ namespace usecase.Cases.ManterLojas
                 return;
             }
 
-            loja.AlterarEndereco(entrada.Cep, entrada.Rua, entrada.Bairro, entrada.Numero);
             loja.AlterarDadosBasicos(entrada.Nome, entrada.Email, entrada.Telefone);
             var validacao = loja.Validar();
 
