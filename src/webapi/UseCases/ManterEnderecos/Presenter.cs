@@ -1,3 +1,4 @@
+using System.IO;
 using core.Gateways;
 using Microsoft.AspNetCore.Mvc;
 using usecase.Cases.ManterEnderecos.Output;
@@ -7,6 +8,9 @@ namespace webapi.UseCases.ManterEnderecos
     public class Presenter : ILimiteDeSaida<SaidaParaManterEnderecos>
     {
         public IActionResult ViewModel { get; set; }
+
+        public IActionResult File { get; set; }
+
         public SaidaParaManterEnderecos Saida { get; set; }
 
         public void Popular(SaidaParaManterEnderecos resposta)
@@ -35,7 +39,7 @@ namespace webapi.UseCases.ManterEnderecos
                     return;
                 }
 
-                ViewModel = new BadRequestResult();
+                ViewModel = new NotFoundResult();
             }
         }
     }

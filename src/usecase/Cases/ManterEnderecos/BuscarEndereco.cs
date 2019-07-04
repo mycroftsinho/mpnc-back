@@ -20,9 +20,9 @@ namespace usecase.Cases.ManterEnderecos
 
         public async Task Executar(EntradaParaBuscarEndereco entrada)
         {
-            if(entrada.LojaId > 0)
+            if(entrada.LojaId > 0 || !string.IsNullOrWhiteSpace(entrada.Email))
             {
-                var enderecos = await repositorioLeitura.BuscarEnderecosDaLoja(entrada.LojaId);
+                var enderecos = await repositorioLeitura.BuscarEnderecosDaLoja(entrada.LojaId, entrada.Email);
                 _outputBoundary.Popular(new SaidaParaManterEnderecos(true, enderecos.Select(x => new SaidaDeEndereco(x)).ToList()));
                 return;
             }

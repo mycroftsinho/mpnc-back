@@ -2,29 +2,33 @@ namespace usecase.Cases.ManterEnderecos.Input
 {
     public class EntradaParaGravarOuAlterarEndereco
     {
-        public EntradaParaGravarOuAlterarEndereco(int id, int lojaId, string rua, string numero, string bairro, string cep)
+        public EntradaParaGravarOuAlterarEndereco(int id, string email, string rua, string numero, string bairro, string cep, string contentType = null, byte[] imagem = null)
         {
             Id = id;
-            LojaId = lojaId;
+            Email = email;
             Rua = rua;
             Numero = numero;
             Bairro = bairro;
             Cep = cep;
+            ContentType = contentType;
+            Imagem = imagem;
         }
         
-        public EntradaParaGravarOuAlterarEndereco(int lojaId, string rua, string numero, string bairro, string cep)
+        public EntradaParaGravarOuAlterarEndereco(string email, string rua, string numero, string bairro, string cep, string contentType = null, byte[] imagem = null)
         {
             Id = 0;
-            LojaId = lojaId;
+            Email = email;
             Rua = rua;
             Numero = numero;
             Bairro = bairro;
             Cep = cep;
+            ContentType = contentType;
+            Imagem = imagem;
         }
 
         public int Id { get; private set; }
 
-        public int LojaId { get; private set; }
+        public string Email { get; private set; }
 
         public string Rua { get; private set; }
 
@@ -33,5 +37,9 @@ namespace usecase.Cases.ManterEnderecos.Input
         public string Bairro { get; private set; }
 
         public string Cep { get; private set; }
+
+        public string ContentType{ get; private set; }
+
+        public byte[] Imagem { get; private set; }
     }
 }

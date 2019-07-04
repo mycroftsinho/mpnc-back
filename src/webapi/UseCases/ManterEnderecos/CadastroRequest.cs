@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+
 namespace webapi.UseCases.ManterEnderecos
 {
     public class CadastroRequest
@@ -13,5 +15,7 @@ namespace webapi.UseCases.ManterEnderecos
         public string Bairro { get; set; }
 
         public string Cep { get; set; }
+
+        //public IFormFile Imagem {get;set;}
     }
 }

@@ -4,17 +4,20 @@ using dominio.Modelo;
 using usecase.Cases.ManterEnderecos.Input;
 using usecase.Cases.ManterEnderecos.Output;
 using usecase.Repositorio.Endereco;
+using usecase.Repositorio.Loja;
 
 namespace usecase.Cases.ManterEnderecos
 {
     public class GravarOuAlterarEndereco : ILimiteDeEntrada<EntradaParaGravarOuAlterarEndereco>
     {
+        private readonly ILojaLeituraRepositorio lojaLeituraRepositorio;
         private readonly IEnderecoLeituraRepositorio leituraRepositorio;
         private readonly IEnderecoEscritaRepositorio escritaRepositorio;
         private readonly ILimiteDeSaida<SaidaParaManterEnderecos> _outputBoundary;
 
-        public GravarOuAlterarEndereco(IEnderecoLeituraRepositorio leituraRepositorio, IEnderecoEscritaRepositorio escritaRepositorio, ILimiteDeSaida<SaidaParaManterEnderecos> outputBoundary)
+        public GravarOuAlterarEndereco(IEnderecoLeituraRepositorio leituraRepositorio, IEnderecoEscritaRepositorio escritaRepositorio, ILimiteDeSaida<SaidaParaManterEnderecos> outputBoundary, ILojaLeituraRepositorio lojaLeituraRepositorio)
         {
+            this.lojaLeituraRepositorio = lojaLeituraRepositorio;
             this.leituraRepositorio = leituraRepositorio;
             this.escritaRepositorio = escritaRepositorio;
             _outputBoundary = outputBoundary;
@@ -29,6 +32,7 @@ namespace usecase.Cases.ManterEnderecos
                 endereco.AlterarNumero(entrada.Numero);
                 endereco.AlterarRua(entrada.Rua);
                 endereco.AlterarCep(entrada.Cep);
+                endereco.AlterarImagem(entrada.Imagem, entrada.ContentType);
 
                 var validacao = endereco.Validar();
                 if (validacao.IsValid)
@@ -42,7 +46,13 @@ namespace usecase.Cases.ManterEnderecos
                 return;
             }
 
-            var novoEndereco = new Endereco(entrada.LojaId, entrada.Rua, entrada.Numero, entrada.Bairro, entrada.Cep);
+            var loja = await lojaLeituraRepositorio.BuscarLojaPorEmail(entrada.Email);
+            if(loja == null)
+            {
+                _outputBoundary.Popular(new SaidaParaManterEnderecos(false));
+                return;
+            }
+            var novoEndereco = new Endereco(loja.Id, entrada.Rua, entrada.Numero, entrada.Bairro, entrada.Cep, entrada.ContentType, entrada.Imagem);
 
             var resultado = novoEndereco.Validar();
             if (resultado.IsValid)

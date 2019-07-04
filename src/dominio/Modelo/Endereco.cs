@@ -1,3 +1,4 @@
+using System;
 using dominio.Scopers;
 using FluentValidation.Results;
 
@@ -5,9 +6,11 @@ namespace dominio.Modelo
 {
     public class Endereco
     {
-        public Endereco(int lojaId, string rua, string numero, string bairro, string cep)
+        public Endereco(int lojaId, string rua, string numero, string bairro, string cep, string contentType = null, byte[] imagem = null)
         {
             LojaId = lojaId;
+            Imagem = imagem;
+            ContentType = contentType;
             AlterarRua(rua);
             AlterarBairro(bairro);
             AlterarCep(cep);
@@ -30,6 +33,10 @@ namespace dominio.Modelo
         public string Bairro { get; private set; }
 
         public string Cep { get; private set; }
+
+        public string ContentType { get; private set; }
+
+        public byte[] Imagem { get; private set; }
 
         public Loja Loja { get; private set; }
         
@@ -56,6 +63,15 @@ namespace dominio.Modelo
         public void AlterarNumero(string numero)
         {
             Numero = numero;
+        }
+
+        public void AlterarImagem(byte[] imagem, string contentType)
+        {
+            if(imagem != null)
+            {
+                Imagem = imagem;
+                ContentType = contentType;
+            }
         }
     }
 }

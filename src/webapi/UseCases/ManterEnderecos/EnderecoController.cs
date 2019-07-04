@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Authorization;
 using usecase.Cases.ManterEnderecos.Input;
 using usecase.Cases.ManterEnderecos.Output;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace webapi.UseCases.ManterEnderecos
 {
     [ApiController]
-    [Authorize("Bearer")]
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
-    [Produces("application/json")]
     public class EnderecoController : Controller
     {
         private readonly ILimiteDeEntrada<EntradaParaGravarOuAlterarEndereco> _inputCadastro;
@@ -28,15 +30,17 @@ namespace webapi.UseCases.ManterEnderecos
 
         [HttpGet]
         [Route("ListarEnderecos")]
-        public async Task<IActionResult> ListarEnderecos(int lojaId)
+        [Produces("application/json")]
+        public async Task<IActionResult> ListarEnderecos(string email)
         {
-            var request = new EntradaParaBuscarEndereco(lojaId);
+            var request = new EntradaParaBuscarEndereco(email);
             await _inputBusca.Executar(request);
             return _presenter.ViewModel;
         }
 
         [HttpGet]
         [Route("ObterEndereco")]
+        [Produces("application/json")]
         public async Task<IActionResult> ObterEndereco(int id)
         {
             var request = new EntradaParaBuscarEndereco(0, id);
@@ -45,22 +49,35 @@ namespace webapi.UseCases.ManterEnderecos
         }
 
         [HttpPost]
-        [Route("CadastrarLoja")]
-        public async Task<IActionResult> CadastrarEndereco([FromBody] CadastroRequest message)
+        [Route("CadastrarEndereco")]
+        [Produces("multipart/form-data")]
+        public async Task<IActionResult> CadastrarEndereco([FromForm]int id, [FromForm]string email, [FromForm]string telefone, [FromForm]string numero, [FromForm]string cep, [FromForm]string bairro, [FromForm]string rua, [FromForm] IFormFile imagem)
         {
-            var request = new EntradaParaGravarOuAlterarEndereco(message.Id, message.LojaId, message.Rua, message.Numero, message.Bairro, message.Cep);
+            byte[] arquivo = null;
+            string cotenttype = null;
+            if (imagem != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await imagem.CopyToAsync(memoryStream);
+                    arquivo = memoryStream.ToArray();
+                    cotenttype = imagem.ContentType;
+                }
+            }
+
+            var request = new EntradaParaGravarOuAlterarEndereco(id, email, rua, numero, bairro, cep, cotenttype, arquivo);
             await _inputCadastro.Executar(request);
             return _presenter.ViewModel;
         }
 
         [HttpPost]
         [Route("Remover")]
+        [Produces("application/json")]
         public async Task<IActionResult> Remover([FromBody] CadastroRequest message)
         {
             var request = new EntradaParaRemoverEndereco(message.Id);
             await _inputRemover.Executar(request);
             return _presenter.ViewModel;
         }
-
     }
 }

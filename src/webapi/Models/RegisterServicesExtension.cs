@@ -32,6 +32,8 @@ using usecase.Cases.AprovarSolicitacaoDeCadastro;
 using usecase.Cases.AprovarSolicitacaoDeCadastro.Input;
 using usecase.Cases.AprovarSolicitacaoDeCadastro.Output;
 using Microsoft.Extensions.DependencyInjection;
+using data.Repositorio.Endereco;
+using usecase.Repositorio.Endereco;
 
 namespace webapi.Models
 {
@@ -92,6 +94,8 @@ namespace webapi.Models
             services.AddScoped<IProdutoEscritaRepositorio, ProdutoEscritaRepositorio>();
             services.AddScoped<IUsuarioLeituraRepositorio, UsuarioLeituraRepositorio>();
             services.AddScoped<IUsuarioEscritaRepositorio, UsuarioEscritaRepositorio>();
+            services.AddScoped<IEnderecoLeituraRepositorio, EnderecoLeituraRepositorio>();
+            services.AddScoped<IEnderecoEscritaRepositorio, EnderecoEscritaRepositorio>();
 
             return services;
         }

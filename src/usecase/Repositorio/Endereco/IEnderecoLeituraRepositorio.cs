@@ -5,7 +5,7 @@ namespace usecase.Repositorio.Endereco
 {
     public interface IEnderecoLeituraRepositorio
     {
-        Task<IEnumerable<dominio.Modelo.Endereco>> BuscarEnderecosDaLoja(int lojaId);
+        Task<IEnumerable<dominio.Modelo.Endereco>> BuscarEnderecosDaLoja(int lojaId, string email);
         Task<dominio.Modelo.Endereco> BuscarEnderecoPorId(int enderecoId);
     }
 }

@@ -26,5 +26,12 @@ namespace data.Repositorio.Endereco
         {
             return await contexto.Endereco.AsNoTracking().Where(x => x.LojaId == lojaId).ToListAsync();
         }
+
+        public async Task<IEnumerable<dominio.Modelo.Endereco>> BuscarEnderecosDaLoja(int lojaId, string email)
+        {
+            return lojaId > 0
+                ? await contexto.Endereco.AsNoTracking().Where(x => x.LojaId == lojaId).ToListAsync()
+                : await contexto.Endereco.AsNoTracking().Where(x => x.Loja.Email.Equals(email)).ToListAsync();
+        }
     }
 }

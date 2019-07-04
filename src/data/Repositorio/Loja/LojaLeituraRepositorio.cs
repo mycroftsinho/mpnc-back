@@ -41,5 +41,10 @@ namespace data.Repositorio.Loja
         {
             return await _contexto.Loja.Include(x => x.Cota).AsNoTracking().Where(x => x.StatusDeAtualizacaoCadastral).ToListAsync();
         }
+
+        public async Task<dominio.Modelo.Loja> BuscarLojaPorEmail(string email)
+        {
+            return await _contexto.Loja.AsNoTracking().FirstOrDefaultAsync(x => x.Email.Equals(email));
+        }
     }
 }

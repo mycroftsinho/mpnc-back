@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using dominio.Modelo;
 
 namespace usecase.Repositorio.Loja
 {
@@ -15,5 +14,7 @@ namespace usecase.Repositorio.Loja
         Task<dominio.Modelo.Loja> BuscarLoja(string email, string cnpj);
         
         Task<dominio.Modelo.Loja> BuscarLojaPorId(int lojaId);
+        
+        Task<dominio.Modelo.Loja> BuscarLojaPorEmail(string email);
     }
 }

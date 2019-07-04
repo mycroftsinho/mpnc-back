@@ -12,6 +12,8 @@ namespace usecase.Cases.ManterEnderecos.Output
             Numero = endereco.Numero;
             Bairro = endereco.Bairro;
             Cep = endereco.Cep;
+            Imagem = endereco.Imagem;
+            ContentType = endereco.ContentType;
         }
 
         public int Id { get; private set; }
@@ -25,5 +27,9 @@ namespace usecase.Cases.ManterEnderecos.Output
         public string Bairro { get; private set; }
 
         public string Cep { get; private set; }
+
+        public byte[] Imagem { get; private set; }
+
+        public string ContentType { get; private set; }
     }
 }
